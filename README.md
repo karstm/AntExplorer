@@ -37,5 +37,5 @@
 
 The **space bar** takes a photo with the tiny robots black and white camera.
 
-Pressing the **[A]**nalyze key, scans the area for pheromones.
-Pressing the **[S]**pray key, releases the pheromone that was analyzed last.
+Pressing the **[A]nalyze key**, scans the area for pheromones.
+Pressing the **[S]pray key**, releases the pheromone that was analyzed last.
