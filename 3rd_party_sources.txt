@@ -1,0 +1,11 @@
+Sources for 3rd party assets used in the project.
+
+Textures:
+    sand texture: https://3dtextures.me/2017/03/23/sand-002/
+    pine needles texture: https://polyhaven.com/a/forest_leaves_04
+    tree bark texture: https://polyhaven.com/a/pine_bark
+    forest HDRI: https://polyhaven.com/a/mossy_forest
+
+3D models:
+    trunk: https://polyhaven.com/a/dead_tree_trunk_02
+    fir tree: https://polyhaven.com/a/fir_tree_01
