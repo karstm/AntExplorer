@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
@@ -6,6 +8,24 @@ public class MapManager : MonoBehaviour
     public Transform targetObject;          // The 3D object we want to track (y,z pos, x rot)
     public RectTransform mapImageRect;      // The RectTransform of your MapImage
     public RectTransform iconRect;          // The RectTransform of your MapIcon
+    public GameState gameState;
+    public SplineMovementManager movementManager;
+
+    // References to the UI elements
+    [Header("Screen Images")]
+    public Image leftArrow;
+    public Image rightArrow;           
+    public Image entryText;                 
+    public Image queenText;                 
+    public Image ventilationText;           
+    public Image wasteText;  
+    public Image entryWarning;               
+    public Image spiderWarning;
+    public Image centipedeWarning;         
+    public Image eggsText;                  
+    public Image foodText;
+
+
 
     [Header("Calibration Points")]
     public CalibrationData cal1;            // Calibration data for the first point
@@ -32,7 +52,26 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-            if (targetObject == null) return;
+        // Update the player position
+        UpdateIcon();
+
+        // Update the UI elements
+        entryText.enabled = gameState.photoEntry;
+        queenText.enabled = gameState.photoQueen;
+        ventilationText.enabled = gameState.photoVentilation;
+        wasteText.enabled = gameState.photoWaste;
+        spiderWarning.enabled = gameState.photoSpider && !gameState.sprayedSpider;
+        centipedeWarning.enabled = gameState.photoIntruder;
+        entryWarning.enabled = gameState.photoEntry && !gameState.sprayedEntry;
+        eggsText.enabled = gameState.photoEggs;
+        foodText.enabled = gameState.photoFood;
+        rightArrow.enabled = !movementManager.takeLeftFork;
+        leftArrow.enabled = movementManager.takeLeftFork;
+    }
+
+    public void UpdateIcon()
+    {
+        if (targetObject == null) return;
 
             // Get the object's y/z position
             float objZ = targetObject.position.z;

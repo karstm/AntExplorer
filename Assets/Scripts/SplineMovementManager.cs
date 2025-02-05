@@ -1,16 +1,22 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
+using System;
 
 public class SplineMovementManager : MonoBehaviour
 {
-    [SerializeField] private SplineContainer currentSpline; // initial spline is set in the inspector 
+    [SerializeField] public SplineContainer currentSpline; // initial spline is set in the inspector 
+    [SerializeField] private SplineContainer entrySpline;
+    [SerializeField] private SplineContainer queenSpline;
+    [SerializeField] private SplineContainer ventilationSpline;
     [SerializeField] private float moveSpeed = 4f;          
-    private float t = 0f;                                   // Current progress on spline [0..1]
-    private int orientation = 1;                            // 1 = forward, -1 = backward
+    [SerializeField] private GameState gameState;            // Reference to the game state
+
+    public float t = 0f;                                   // Current progress on spline [0..1]
+    public int orientation = 1;                            // 1 = forward, -1 = backward
 
     // The player's fork choice (true = left, false = right, for example)
-    private bool takeLeftFork = true;
+    public bool takeLeftFork = true;
 
     private bool move = false;
 
@@ -32,16 +38,37 @@ public class SplineMovementManager : MonoBehaviour
             move = true;
         }
 
+        // Block if the player hasn't sprayed the entry
+        if (currentSpline == entrySpline && t >= 0.5f && !gameState.sprayedEntry && orientation == 1)
+        {
+            move = false;
+        }
+
+        // Block if the player hasn't sprayed the spider
+        if (currentSpline == queenSpline && t >= 0.5f && !gameState.sprayedSpider && orientation == 1)
+        {
+            move = false;
+        }
+
+        if (currentSpline == ventilationSpline && t >= 0.9f && !gameState.photoQueen && orientation == 1)
+        {
+            move = false;
+        }
+
         // TOGGLE DIRECTION
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             orientation *= -1;
         }
 
         // TOGGLE LEFT/RIGHT FORK
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            takeLeftFork = !takeLeftFork;
+            takeLeftFork = true;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            takeLeftFork = false;
         }
     }
 

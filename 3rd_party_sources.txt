@@ -9,3 +9,7 @@ Textures:
 3D models:
     trunk: https://polyhaven.com/a/dead_tree_trunk_02
     fir tree: https://polyhaven.com/a/fir_tree_01
+
+sounds:
+    notification: https://mixkit.co/free-sound-effects/notification/
+    forest sound: https://www.chosic.com/download-audio/27950/

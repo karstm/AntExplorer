@@ -1,4 +1,6 @@
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Splines;
 using UnityEngine.UI;  // For RawImage
 
 class CaptureManager : MonoBehaviour
@@ -14,6 +16,21 @@ class CaptureManager : MonoBehaviour
     [Header("Effect Settings")]
     [Range(0f,0.2f)] public float noiseStrength = 0.05f;
 
+    public GameState gameState;
+
+    public SplineMovementManager movementManager;
+
+    public PhotoLocation[] photoLocations;
+
+
+    [System.Serializable]
+    public struct PhotoLocation
+    {
+        public bool isPhotoTaken;
+        public SplineContainer spline;
+        public float t;
+    }
+
 
 
     private Texture2D capturedTexture;
@@ -23,7 +40,18 @@ class CaptureManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             CaptureSnapshot();
+            CheckPhotoLocations();
         }
+
+        gameState.photoEntry = photoLocations[0].isPhotoTaken;
+        gameState.photoQueen = photoLocations[1].isPhotoTaken;
+        gameState.photoVentilation = photoLocations[2].isPhotoTaken;
+        gameState.photoWaste = photoLocations[3].isPhotoTaken;
+        gameState.photoSpider = photoLocations[4].isPhotoTaken;
+        gameState.photoEggs = photoLocations[5].isPhotoTaken;
+        gameState.photoFood = photoLocations[6].isPhotoTaken;
+        gameState.photoIntruder = photoLocations[7].isPhotoTaken;
+        gameState.photoFlight = photoLocations[8].isPhotoTaken;
     }
 
     void CaptureSnapshot()
@@ -80,7 +108,7 @@ class CaptureManager : MonoBehaviour
         // Apply noise
         for (int i = 0; i < size; i++)
         {
-            float noise = Random.Range(-noiseStrength, noiseStrength);
+            float noise = UnityEngine.Random.Range(-noiseStrength, noiseStrength);
             float val = pixels[i].r + noise; // r=g=b because of grayscale
             val = Mathf.Clamp01(val);
 
@@ -89,5 +117,33 @@ class CaptureManager : MonoBehaviour
 
         tex.SetPixels(pixels);
         tex.Apply();
+    }
+
+    void CheckPhotoLocations()
+    {
+        for (int i = 0; i < photoLocations.Length; i++)
+        {
+            if (movementManager.currentSpline != photoLocations[i].spline) 
+            {
+                continue;
+            }
+            
+            // check if the t values are close enough
+            if (math.abs(movementManager.t - photoLocations[i].t) > 0.05f)
+            {
+                continue;
+            }
+
+            // check if the orientation is correct
+            if (photoLocations[i].t < 0.2f && movementManager.orientation > 0)
+            {
+                continue;
+            }
+            if (photoLocations[i].t > 0.8f && movementManager.orientation < 0)
+            {
+                continue;
+            }
+            photoLocations[i].isPhotoTaken = true;
+        }
     }
 }

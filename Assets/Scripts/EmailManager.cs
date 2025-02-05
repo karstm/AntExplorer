@@ -1,13 +1,18 @@
     using UnityEngine;
     using TMPro;
+using UnityEngine.UI;
 
-    public class EmailManager : MonoBehaviour
+public class EmailManager : MonoBehaviour
     {
         //Reference to the text field that will display the mail content
-        [SerializeField] 
-        private  TextMeshProUGUI mailTextField;
+        public  TextMeshProUGUI mailTextField;
 
         public string[] allMails;
+        public GameState gameState;
+
+        public Button[] allMailButtons;
+
+        float time = 0f;
 
         public void ShowMail(int index)
         {
@@ -18,5 +23,26 @@
             }
 
             mailTextField.text = allMails[index];
+        }
+
+        public void Update()
+        {   
+            time += Time.deltaTime;
+
+            // hide the mail button if not available yet
+            allMailButtons[0].gameObject.SetActive(time > 5f);
+            allMailButtons[1].gameObject.SetActive(time > 20f);
+            allMailButtons[2].gameObject.SetActive(gameState.photoEntry);
+            allMailButtons[3].gameObject.SetActive(gameState.sprayedEntry);
+            allMailButtons[4].gameObject.SetActive(gameState.photoIntruder);
+            allMailButtons[5].gameObject.SetActive(gameState.photoVentilation);
+            allMailButtons[6].gameObject.SetActive(gameState.photoWaste);
+            allMailButtons[7].gameObject.SetActive(gameState.photoSpider);
+            allMailButtons[8].gameObject.SetActive(gameState.photoEggs);
+            allMailButtons[9].gameObject.SetActive(gameState.smelledWarriors);
+            allMailButtons[10].gameObject.SetActive(gameState.sprayedSpider);
+            allMailButtons[11].gameObject.SetActive(gameState.photoQueen);
+            allMailButtons[12].gameObject.SetActive(gameState.smelledSex);
+            allMailButtons[13].gameObject.SetActive(gameState.photoFlight);
         }
     }
