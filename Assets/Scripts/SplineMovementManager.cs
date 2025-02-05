@@ -5,18 +5,20 @@ using System;
 
 public class SplineMovementManager : MonoBehaviour
 {
-    [SerializeField] public SplineContainer currentSpline; // initial spline is set in the inspector 
-    [SerializeField] private SplineContainer entrySpline;
-    [SerializeField] private SplineContainer queenSpline;
-    [SerializeField] private SplineContainer ventilationSpline;
-    [SerializeField] private float moveSpeed = 4f;          
-    [SerializeField] private GameState gameState;            // Reference to the game state
+    [Header("Game State")]
+    public GameState gameState;                     
+    [Header("Spline References")]
+    public SplineContainer currentSpline;               // initial spline is set in the inspector 
+    public SplineContainer entrySpline;
+    public SplineContainer queenSpline;
+    public SplineContainer ventilationSpline;
 
-    public float t = 0f;                                   // Current progress on spline [0..1]
-    public int orientation = 1;                            // 1 = forward, -1 = backward
+    [Header("Movement Settings")]
+    public float moveSpeed = 4f;          
 
-    // The player's fork choice (true = left, false = right, for example)
-    public bool takeLeftFork = true;
+    [NonSerialized] public float t = 0f;                // Current progress on spline [0..1]
+    [NonSerialized] public int orientation = 1;         // 1 = forward, -1 = backward
+    [NonSerialized] public bool takeLeftFork = true;    // The player's fork choice (true = left, false = right)
 
     private bool move = false;
 
@@ -32,7 +34,7 @@ public class SplineMovementManager : MonoBehaviour
     {
         move = false;
 
-        // TOGGLE MOVEMENT
+        // Toggle movement
         if (Input.GetKey(KeyCode.UpArrow))
         {
             move = true;
@@ -50,18 +52,19 @@ public class SplineMovementManager : MonoBehaviour
             move = false;
         }
 
+        // Block if the player hasn't taken a photo of the queen
         if (currentSpline == ventilationSpline && t >= 0.9f && !gameState.photoQueen && orientation == 1)
         {
             move = false;
         }
 
-        // TOGGLE DIRECTION
+        // Toggle forward/backward
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             orientation *= -1;
         }
 
-        // TOGGLE LEFT/RIGHT FORK
+        // Toggle left/right fork
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             takeLeftFork = true;

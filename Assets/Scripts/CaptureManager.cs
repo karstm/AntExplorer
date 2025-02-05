@@ -31,8 +31,6 @@ class CaptureManager : MonoBehaviour
         public float t;
     }
 
-
-
     private Texture2D capturedTexture;
 
     void Update()
@@ -43,6 +41,7 @@ class CaptureManager : MonoBehaviour
             CheckPhotoLocations();
         }
 
+        // Link the photo locations to the game state
         gameState.photoEntry = photoLocations[0].isPhotoTaken;
         gameState.photoQueen = photoLocations[1].isPhotoTaken;
         gameState.photoVentilation = photoLocations[2].isPhotoTaken;
@@ -91,6 +90,7 @@ class CaptureManager : MonoBehaviour
         snapshotCamera.enabled = wasEnabled;
     }
 
+
     void FilterTexture(Texture2D tex)
     {
         Color[] pixels = tex.GetPixels();
@@ -119,10 +119,12 @@ class CaptureManager : MonoBehaviour
         tex.Apply();
     }
 
+
     void CheckPhotoLocations()
     {
         for (int i = 0; i < photoLocations.Length; i++)
         {
+            // check if the spline is correct
             if (movementManager.currentSpline != photoLocations[i].spline) 
             {
                 continue;
@@ -143,6 +145,8 @@ class CaptureManager : MonoBehaviour
             {
                 continue;
             }
+
+            // if all checks pass, take the photo
             photoLocations[i].isPhotoTaken = true;
         }
     }

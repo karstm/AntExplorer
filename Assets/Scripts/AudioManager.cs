@@ -9,14 +9,12 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioSource;     // The audio source to play the sound
     public AudioClip activationSound;   // Sound to play when an object becomes active
 
-    private bool[] previousStates;
+    private bool[] previousStates;      // Remember the previous state of each object
 
     void Start()
     {
         // Initialize the previousStates array to match the length of objectsToCheck
         previousStates = new bool[objectsToCheck.Length];
-
-        // Set up their initial states
         for (int i = 0; i < objectsToCheck.Length; i++)
         {
             previousStates[i] = objectsToCheck[i].activeSelf;
@@ -29,7 +27,7 @@ public class AudioManager : MonoBehaviour
         {
             bool currentActive = objectsToCheck[i].activeSelf;
 
-            // Check if it transitioned from inactive to active
+            // Check if it transitioned from inactive to active, if so play the sound
             if (currentActive && !previousStates[i])
             {
                 audioSource.PlayOneShot(activationSound);

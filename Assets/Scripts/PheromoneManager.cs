@@ -3,10 +3,14 @@ using UnityEngine.Splines;
 
 public class PheromoneManager : MonoBehaviour
 {
+    [Header("Manager References")]
     public SplineMovementManager movementManager;
     public GameState gameState;
+    
+    [Header("Indicator Material")]
     public Material indicatorMaterial;
 
+    [Header("Spline References")]
     public SplineContainer entrySpline;
     public SplineContainer[] alarmSplines;
     public SplineContainer[] sexSplines;
@@ -35,6 +39,8 @@ public class PheromoneManager : MonoBehaviour
 
     public void CheckPheromone()
     {
+        // Check if the player is on a specific spline and fullfills the requirements and set the pheromone accordingly
+
         if (movementManager.currentSpline == entrySpline && movementManager.t <= 0.55f && movementManager.t >= 0.2f)
         {
             Pheromone = 1;
@@ -70,6 +76,8 @@ public class PheromoneManager : MonoBehaviour
 
     public void SprayPheromone()
     {
+        // Check if the player is on a specific spline and fullfills the requirements and set the game state accordingly
+        
         if (movementManager.currentSpline == spiderSpline && Pheromone == 2)
         {
             gameState.sprayedSpider = true;

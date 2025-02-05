@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    // Variables to track the game state
+    // These are public so they can be accessed from other scripts and the Unity Editor for testing
     public bool photoEntry = false;
     public bool sprayedEntry = false;
     public bool photoIntruder = false;

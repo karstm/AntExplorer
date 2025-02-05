@@ -3,11 +3,9 @@ using UnityEngine.Splines;
 
 public class SplineConnections : MonoBehaviour
 {
-    /// <summary>
     /// Spline connections to take at the start and end of the track.
     /// Tick the "Backward" checkbox if the next spline should be taken in reverse.
-    /// </summary>
-    /// 
+    
     [System.Serializable]
     public struct SplinePath
     {

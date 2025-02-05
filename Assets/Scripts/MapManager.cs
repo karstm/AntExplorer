@@ -55,7 +55,7 @@ public class MapManager : MonoBehaviour
         // Update the player position
         UpdateIcon();
 
-        // Update the UI elements
+        // Show or hide the map ui elements
         entryText.enabled = gameState.photoEntry;
         queenText.enabled = gameState.photoQueen;
         ventilationText.enabled = gameState.photoVentilation;

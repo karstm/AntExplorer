@@ -12,8 +12,9 @@ public class EmailManager : MonoBehaviour
 
         public Button[] allMailButtons;
 
-        float time = 0f;
+        private float time = 0f;
 
+        // this funtion is called from the mail buttons in the email panel
         public void ShowMail(int index)
         {
             if (index < 0 || index >= allMails.Length)
@@ -29,7 +30,7 @@ public class EmailManager : MonoBehaviour
         {   
             time += Time.deltaTime;
 
-            // hide the mail button if not available yet
+            // set the conditions for the mail buttons to be active 
             allMailButtons[0].gameObject.SetActive(time > 5f);
             allMailButtons[1].gameObject.SetActive(time > 20f);
             allMailButtons[2].gameObject.SetActive(gameState.photoEntry);

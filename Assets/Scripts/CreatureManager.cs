@@ -23,7 +23,8 @@ public class CreatureManager : MonoBehaviour
 
     void Update()
     {
-        // decide what creatures to show based on the current spline and game state
+        // decide what creatures to show based on the current spline and game state, 
+        // hide creatures that are out of sight to save performance
         guardAnt.SetActive(movementManager.currentSpline == guardAntSpline && !gameState.sprayedEntry);
         foreach (SplineContainer centipedeSpline in centipedeSplines)
         {
