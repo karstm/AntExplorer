@@ -65,7 +65,6 @@ class CaptureManager : MonoBehaviour
 
     void FilterTexture(Texture2D tex)
     {
-        print("Filtering texture");
         Color[] pixels = tex.GetPixels();
         int size = pixels.Length;
 
