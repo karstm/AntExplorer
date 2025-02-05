@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;  // Adjust sensitivity as needed
+    public float mouseSensitivity = 100f;
 
     // Rotation limits
     public float xLimit = 45f;  // Limit for horizontal (yaw) movement (+/- degrees)
     public float yLimit = 30f;  // Limit for vertical (pitch) movement (+/- degrees)
 
-    private Vector3 initialRotation;  // To store the starting rotation
-    private float yaw = 0f;           // Horizontal rotation (yaw)
-    private float pitch = 0f;         // Vertical rotation (pitch)
+    private Vector3 initialRotation; 
+    private float yaw = 0f;
+    private float pitch = 0f;
 
     void Start()
     {
