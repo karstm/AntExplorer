@@ -19,7 +19,6 @@ public class CreatureManager : MonoBehaviour
     public GameObject guardAnt;
     public GameObject centipede;
     public GameObject spider;
-    public GameObject queen;
     public GameObject flyers;
 
     void Update()
@@ -37,7 +36,6 @@ public class CreatureManager : MonoBehaviour
             
         }
         spider.SetActive(movementManager.currentSpline == spiderSpline && !gameState.sprayedSpider);
-        queen.SetActive(movementManager.currentSpline == queenSpline);
         flyers.SetActive(movementManager.currentSpline == flyersSpline && gameState.photoQueen);
     }
 }
