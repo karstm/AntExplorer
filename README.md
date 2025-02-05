@@ -1,4 +1,4 @@
-# Anthill Explorer
+# Ant Explorer
 
 **Ant Explorer** is an educational game prototype where you’ll discover the world of ants through interactive puzzles and exploration. The game puts you in the shoes of a researcher, exploring an anthill. A small robot allows you to dive into the heart of an anthill, learn facts about ant biology and social structures, and solve riddles that reveal how ants communicate, defend their colony, and care for their brood. Enjoy your journey through the tunnels, chambers, and secrets of the anthill as you gain a deeper appreciation for one of nature’s most remarkable societies!
 
