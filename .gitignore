@@ -8,6 +8,7 @@ Thumbs.db
 
 # Visual Studio / JetBrains
 .vs/
+.vscode/
 *.user
 *.userprefs
 .idea/
